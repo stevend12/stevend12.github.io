@@ -1,0 +1,74 @@
+/*******************************************/
+/* CSS File for personal portfolio website */
+/*******************************************/
+
+/* Generic HTML elements */
+body {
+  font-family: Courier;
+}
+
+header {
+  display: inline-block;
+  width: 15%;
+}
+
+header > h1 {
+  color: cyan;
+  padding: 1%;
+  text-align: center;
+}
+
+nav {
+  display: inline;
+}
+
+nav > a {
+  padding: 1%;
+  text-decoration: none;
+  color: cyan;
+  font-size: 120%;
+}
+
+nav > a:hover {
+  background-color: cyan;
+  color: black;
+}
+
+main {
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+footer {
+  padding: 1%;
+  margin: 4% 0% 0%;
+  background: black;
+  color: cyan;
+  text-align: center;
+}
+
+/* Specific elements */
+.top-bar {
+  background: black;
+}
+
+div.feature-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+a.feature-links {
+  background-color: black;
+  color: cyan;
+  width: 30%;
+  padding: 2%;
+  margin: 2%;
+  text-decoration: none;
+}
+
+a:hover.feature-links {
+  background-color: cyan;
+  color: black;
+}
