@@ -138,6 +138,28 @@ p.thumbnail {
   display: none;
 }
 
+/*************************/
+/* Projectile Cannon App */
+/*************************/
+#projectile-canvas {
+  display: block;
+  width: 40%;
+  margin: 1% auto;
+}
+button.projectile-cannon {
+  padding: 1%;
+  margin: 0% 1%;
+  background-color: black;
+  color: cyan;
+  font-family: Courier;
+  font-size: 1.2em;
+  border: none;
+}
+button:hover.projectile-cannon {
+  background-color: rgb(0, 192, 192);
+  color: black;
+}
+
 /* Large screen (laptop/desktop) */
 @media screen and (min-width: 800px){
 

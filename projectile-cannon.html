@@ -21,9 +21,129 @@
         This web app is a physics simulation of 2D projectile motion.
         Fire up the cannon!
       </p>
+      <canvas id="projectile-canvas"></canvas>
+      <button class="projectile-cannon" onclick="changeAngle(-2);">&uarr;</button>
+      <button class="projectile-cannon" onclick="changeAngle(2);">&darr;</button>
+      <button class="projectile-cannon" onclick="fireCannon();">Fire!</button>
 	  </main>
     <footer>
       &copy; 2021 Steven Dolly
     </footer>
+    <script>
+      // Global variables
+      var canvas = document.getElementById("projectile-canvas");
+      var ctx = canvas.getContext("2d");
+      var cannon_angle = -45.0;
+      var cannonX = 0.1;
+      var cannonY = 0.8;
+      var aspectRatio = 1.4;
+      // Functions
+      function drawPCCanvas()
+      {
+        // Set canvas width/height and clear canvas
+        var w = canvas.clientWidth;
+        canvas.width = w;
+        var h = w/aspectRatio;
+        canvas.height = h;
+        ctx.clearRect(0, 0, w, h);
+        // Draw sky and grass
+        ctx.fillStyle = "#87ceeb";
+        ctx.fillRect(0, 0, w, 0.8*h);
+        ctx.fillStyle = "rgb(0, 200, 0)";
+        ctx.fillRect(0, 0.8*h, w, 0.2*h);
+        // Draw cannon
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.arc(cannonX*w, cannonY*h, 0.02*w, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fillStyle = "black";
+        ctx.fill();
+        var r = 0.05*w;
+        var a = cannon_angle*(Math.PI/180.0);
+        ctx.moveTo(cannonX*w, cannonY*h);
+        ctx.lineTo(cannonX*w + r*Math.cos(a), cannonY*h + r*Math.sin(a));
+        ctx.stroke();
+        /*
+        // Draw path and cannonball
+        if(pX.length > 0)
+        {
+          ctx.beginPath();
+          ctx.lineWidth = 1;
+          ctx.moveTo(cannonX*w, 0.8*h);
+          for(var n = 0; n < pX.length; n++)
+          {
+            ctx.lineTo(pX[n], pY[n]);
+            console.log(pX[n]);
+          }
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(pX[(pX.length-1)], pY[(pY.length-1)], 0.01*w, 0, 2*Math.PI);
+          ctx.stroke();
+          ctx.closePath();
+          ctx.fillStyle = "black";
+          ctx.fill();
+        }
+        */
+      }
+      function changeAngle(increment)
+      {
+        cannon_angle += increment;
+        if(cannon_angle < -89) cannon_angle = -89;
+        if(cannon_angle > -1) cannon_angle = -1;
+        drawPCCanvas();
+      }
+      function fireCannon()
+      {
+        // Input
+        var physicalWidth = 400.0; // m
+        var initialVelocity = 50.0; // m/s
+        var dt = 0.1; // s
+        // Initialization
+        var physicalHeight = (physicalWidth / aspectRatio); // m
+        x0 = cannonX*physicalWidth; // m
+        y0 = 0.0; // m
+        var a = Math.abs(cannon_angle)*(Math.PI/180.0); // radians
+        var g = -9.81; // m/s^2
+        v0_x = initialVelocity*Math.cos(a);
+        v0_y = initialVelocity*Math.sin(a);
+        sol1 = Math.abs((-v0_y + Math.sqrt(v0_y*v0_y - 2*y0*g)) / g);
+        sol2 = Math.abs((-v0_y - Math.sqrt(v0_y*v0_y - 2*y0*g)) / g);
+        flightTime = Math.max(sol1, sol2);
+        flightDistance = x0 + v0_x*flightTime;
+        console.log(flightTime);
+        console.log(flightDistance);
+        timeBins = Math.round(flightTime / dt);
+        console.log(timeBins);
+        console.log(v0_y);
+        binCounter = 0;
+        // Increment & Render
+        drawPCCanvas();
+        var pathX = [];
+        var pathY = [];
+        var x = x0;
+        var y = y0;
+        var intervalID = window.setInterval(
+          function(){ simulateTrajectory(); }, Math.round(1000.0*dt));
+        var simulateTrajectory = function()
+        {
+          x += v0_x*dt;
+          y += v0_y*dt;
+          console.log(y);
+          pathX.push(x/physicalWidth);
+          //console.log(pathX.length);
+          pathY.push((physicalHeight*cannonY) - (y/physicalHeight));
+          drawPCCanvas();
+          v0_y += g*dt;
+          binCounter++;
+          if(binCounter >= timeBins) window.clearInterval(intervalID);
+        }
+      }
+      // Initialize app
+      var tX = [0.0];
+      var tY = [0.0];
+      drawPCCanvas(tX, tY);
+    </script>
   </body>
 </html>
