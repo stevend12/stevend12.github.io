@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>The Mainframe - Portfolio Gallery</title>
+    <link rel="stylesheet" href="mainframe-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="utilities.js"></script>
+  </head>
+  <body>
+    <div class="top-bar">
+      <header>
+        <button id="menu-icon" onclick="menuToggle();"><i class="fas fa-bars fa-2x"></i></button>
+        <a href="index.html"><h1>The Mainframe</h1></a>
+      </header>
+      <nav>
+        <a href="portfolio-gallery.html">Portfolio</a>
+        <a href="projectile-cannon.html">Cannon</a>
+      </nav>
+    </div>
+    <main>
+		  <h1>Portfolio Gallery</h1>
+		  <p>
+        This photo gallery is a summary of my programming portfolio to-date.
+      </p>
+      <div id="main-display">
+        <img id="main-image" src="" alt="" />
+        <p id="main-caption"></p>
+        <br />
+      </div>
+      <button class="thumbnail" type="button" onclick="advanceSlide(-1)">&#x2770; Previous</button>
+      <button class="thumbnail" type="button" onclick="advanceSlide(1)">Next &#x2771;</button>
+      <div class="thumbnail">
+        <img class="thumbnail" onclick="selectSlide(1)" src="images/nist-graph.png" alt="WebGL graph of NIST attenuation coefficients" />
+        <p class="thumbnail">
+          One project I've been working on a while is a medical physics educational website.
+          Part of the site includes web apps using WebGL to plot relevant data such as NIST attenuation coefficients.
+          Here's an example of a plot; <a href="https://solutioinsilico.com/medical-physics/applications/nist-lookup.php?ans=0">click/tap here to view web app.</a>
+        </p>
+        <img class="thumbnail" onclick="selectSlide(2)" src="images/p2d-thumb.png" alt="WebGL visualization of radiation therapy dose distribution" />
+        <p class="thumbnail">
+          Other web apps on the same website simulate various aspects of radiation therapy.
+          For example, this app is a simple 2D treatment planning system for external beam radiation therapy.
+          <a href="https://solutioinsilico.com/medical-physics/applications/planner-2d/">Click/tap here to view web app.</a>
+        </p>
+        <img class="thumbnail" onclick="selectSlide(3)" src="images/numerical-phantom.png" alt="OpenGL visualization of 3D organ meshes" />
+        <p class="thumbnail">
+          Part of my PhD research involved modeling organs as 3D meshes.
+          To help with display I made a desktop visualization application utilizing OpenGL.
+        </p>
+        <img class="thumbnail" onclick="selectSlide(4)" src="images/divs-image-panel.png" alt="Screenshot of desktop application for viewing DICOM images" />
+        <p class="thumbnail">
+          Another desktop application I developed also utilizes OpenGL along with GLFW and FreeType to display medical images/data.
+        </p>
+      </div>
+	  </main>
+    <footer>
+      &copy; 2021 Steven Dolly<br />
+      Site validated using the <a href="https://validator.w3.org/">W3C Validator</a>
+    </footer>
+    <script>
+      var currentSlide = 1;
+      function selectSlide(slide)
+      {
+        currentSlide = slide;
+        images = document.getElementsByTagName('img');
+        captions = document.getElementsByTagName('p');
+        document.getElementById('main-image').src = images[currentSlide].src;
+        document.getElementById('main-image').alt = images[currentSlide].alt;
+        document.getElementById('main-caption').innerHTML = captions[currentSlide+1].innerHTML;
+        for(n = 1; n <= 4; n++)
+        {
+          if(n == currentSlide)
+          {
+            images[n].style.opacity = 1.0;
+            images[n].style.border = "solid 1px cyan";
+          }
+          else
+          {
+            images[n].style.opacity = 0.3;
+            images[n].style.border = "none";
+          }
+        }
+      }
+      function advanceSlide(increment)
+      {
+        var slide = currentSlide;
+        slide += increment;
+        if(slide < 1) slide = 4;
+        if(slide > 4) slide = 1;
+        selectSlide(slide);
+      }
+      selectSlide(1);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,241 @@
+/*******************************************/
+/* CSS File for personal portfolio website */
+/*******************************************/
+
+/* Generic HTML elements */
+body {
+  margin: 0%;
+  font-family: Courier;
+  background-color: rgb(0, 64, 64);
+  color: cyan;
+}
+
+header {
+  padding: 1%;
+  display: inline;
+  font-size: 80%;
+}
+header > a {
+  text-decoration: none;
+}
+header > a > h1 {
+  display: inline;
+}
+
+h1 {
+  color: cyan;
+  text-align: center;
+}
+
+nav {
+  display: none;
+}
+nav > a {
+  display: block;
+  padding: 1%;
+  text-decoration: none;
+  color: cyan;
+  font-size: 110%;
+}
+nav > a:hover {
+  background-color: rgb(0, 192, 192);
+  color: black;
+}
+
+p {
+  width: 90%;
+  text-align: justify;
+  margin: 0 auto;
+}
+
+main {
+  text-align: center;
+  margin: 0 auto;
+  margin: 25% 0%;
+}
+
+footer {
+  padding: 1%;
+  margin: 4% 0% 0%;
+  background: black;
+  color: cyan;
+  text-align: center;
+  font-size: 80%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/*********************/
+/* Specific elements */
+/*********************/
+
+/* Top header/navigation bar */
+.top-bar {
+  padding: 1%;
+  background: black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+/* Menu icon */
+#menu-icon
+{
+  background-color: black;
+  color: cyan;
+  border: none;
+  padding: 2%;
+  margin: 2%;
+}
+
+/* Featured links on home page */
+div.feature-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+a.feature-links {
+  background-color: black;
+  color: cyan;
+  width: 70%;
+  padding: 2%;
+  margin: 2%;
+  text-decoration: none;
+}
+a:hover.feature-links {
+  background-color: rgb(0, 192, 192);
+  color: black;
+}
+p.feature-links {
+  width: 80%;
+  padding: 0% 0% 10% 0%;
+  margin: 0 auto;
+}
+
+/* Portfolio gallery */
+#main-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+  background-color: black;
+  width: 85%;
+  margin: 3% auto 1% auto;
+}
+#main-image {
+  height: 25vh;
+  margin: 0% 1%;
+}
+#main-caption {
+  padding: 5%;
+  margin: auto;
+}
+button.thumbnail {
+  width: 40%;
+  padding: 1%;
+  background-color: black;
+  color: cyan;
+  font-family: Courier;
+  font-size: 1em;
+  border: none;
+}
+button:hover.thumbnail {
+  background-color: rgb(0, 192, 192);
+  color: black;
+}
+div.thumbnail {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2% 0%;
+}
+img.thumbnail {
+  height: 10vh;
+  width: auto;
+  margin: 0% 1%;
+  opacity: 50%;
+}
+p.thumbnail {
+  display: none;
+}
+
+/* Projectile Cannon App */
+#projectile-canvas {
+  display: block;
+  width: 90%;
+  margin: 5% auto 2% auto;
+}
+button.projectile-cannon {
+  padding: 1%;
+  margin: 0% 1%;
+  background-color: black;
+  color: cyan;
+  font-family: Courier;
+  font-size: 1.2em;
+  border: none;
+}
+button:hover.projectile-cannon {
+  background-color: rgb(0, 192, 192);
+  color: black;
+}
+
+/*********************************/
+/* Large screen (laptop/desktop) */
+/*********************************/
+@media screen and (min-width: 800px){
+  /* Generic HTML elements */
+  header {
+    width: 30%;
+  }
+  nav {
+    display: inline;
+  }
+  nav > a {
+    display: inline;
+  }
+  p {
+    width: 50%;
+  }
+  main {
+    margin: 10% 0%;
+  }
+
+  /* Menu icon */
+  #menu-icon
+  {
+    display:none;
+  }
+
+  /* Feature Links */
+  div.feature-links {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  a.feature-links {
+    width: 30%;
+  }
+
+  /* Portfolio gallery */
+  #main-display {
+    flex-direction: row;
+    width: 80%;
+  }
+  #main-image {
+    height: 25vh;
+    width: auto;
+  }
+  button.thumbnail {
+    width: 20%;
+    font-size: 1.2em;
+  }
+
+  /* Projectile Cannon App */
+  #projectile-canvas {
+    width: 50%;
+  }
+}

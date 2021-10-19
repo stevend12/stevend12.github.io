@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>The Mainframe - Projectile Cannon</title>
+    <link rel="stylesheet" href="mainframe-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="utilities.js"></script>
+  </head>
+  <body>
+    <div class="top-bar">
+      <header>
+        <button id="menu-icon" onclick="menuToggle();"><i class="fas fa-bars fa-2x"></i></button>
+        <a href="index.html"><h1>The Mainframe</h1></a>
+      </header>
+      <nav>
+        <a href="portfolio-gallery.html">Portfolio</a>
+        <a href="projectile-cannon.html">Cannon</a>
+      </nav>
+    </div>
+    <main>
+		  <h1>Projectile Cannon</h1>
+		  <p>
+        This web app is a physics simulation of 2D projectile motion.
+        Use the up and down arrow buttons to adjust the angle of the cannon.
+        Then fire the cannon!
+      </p>
+      <canvas id="projectile-canvas"></canvas>
+      <button class="projectile-cannon" onclick="changeAngle(-2);">&uarr;</button>
+      <button class="projectile-cannon" onclick="changeAngle(2);">&darr;</button>
+      <button class="projectile-cannon" onclick="fireCannon();">Fire!</button>
+	  </main>
+    <footer>
+      &copy; 2021 Steven Dolly<br />
+      Site validated using the <a href="https://validator.w3.org/">W3C Validator</a>
+    </footer>
+    <script>
+      // Global variables
+      var canvas = document.getElementById("projectile-canvas");
+      var ctx = canvas.getContext("2d");
+      var cannon_angle = -45.0;
+      var cannonX = 0.1;
+      var cannonY = 0.8;
+      var aspectRatio = 1.4;
+      var physicalWidth = 100.0; // m
+      var initialVelocity = 25.0; // m/s
+      var dt = 0.01; // s
+      var animationID;
+      var count = 0;
+      // Functions
+      function drawPCCanvas()
+      {
+        // Set canvas width/height and clear canvas
+        var w = canvas.clientWidth;
+        canvas.width = w;
+        var h = w/aspectRatio;
+        canvas.height = h;
+        ctx.clearRect(0, 0, w, h);
+        // Draw sky and grass
+        ctx.fillStyle = "#87ceeb";
+        ctx.fillRect(0, 0, w, 0.8*h);
+        ctx.fillStyle = "rgb(0, 200, 0)";
+        ctx.fillRect(0, 0.8*h, w, 0.2*h);
+        // Draw cannon
+        ctx.lineWidth = 12;
+        ctx.beginPath();
+        ctx.arc(cannonX*w, cannonY*h, 0.02*w, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fillStyle = "black";
+        ctx.fill();
+        var r = 0.05*w;
+        var a = cannon_angle*(Math.PI/180.0);
+        ctx.moveTo(cannonX*w, cannonY*h);
+        ctx.lineTo(cannonX*w + r*Math.cos(a), cannonY*h + r*Math.sin(a));
+        ctx.stroke();
+      }
+      function changeAngle(increment)
+      {
+        cannon_angle += increment;
+        if(cannon_angle < -87) cannon_angle = -87;
+        if(cannon_angle > -5) cannon_angle = -5;
+        drawPCCanvas();
+      }
+      function fireCannon()
+      {
+        // Initialization
+        var physicalHeight = (physicalWidth / aspectRatio); // m
+        var x0 = cannonX*physicalWidth; // m
+        var y0 = 0.0; // m
+        var a = Math.abs(cannon_angle)*(Math.PI/180.0); // radians
+        var g = -9.81; // m/s^2
+        var v0_x = initialVelocity*Math.cos(a);
+        var v0_y = initialVelocity*Math.sin(a);
+        var sol1 = Math.abs((-v0_y + Math.sqrt(v0_y*v0_y - 2*y0*g)) / g);
+        var sol2 = Math.abs((-v0_y - Math.sqrt(v0_y*v0_y - 2*y0*g)) / g);
+        var flightTime = Math.max(sol1, sol2);
+        var flightDistance = x0 + v0_x*flightTime;
+        console.log("Flight Time (s) = ", flightTime);
+        console.log("Flight Distance (m) = ", flightDistance);
+        var timeBins = Math.round(flightTime / dt);
+        // Calculate Path
+        var pathX = [];
+        var pathY = [];
+        var x = x0;
+        var y = y0;
+        for(var n = 0; n <= timeBins; n++)
+        {
+          x += v0_x*dt;
+          y += v0_y*dt;
+          var drawX = (x/physicalWidth)*canvas.width;
+          var drawY = (cannonY - (y/physicalHeight))*canvas.height;
+          pathX.push(drawX);
+          pathY.push(drawY);
+          v0_y += g*dt;
+        }
+        // Render
+        count = 0;
+        animationID = window.setInterval(
+          function(){animateTrajectory(pathX, pathY)}, 1000.0*dt);
+      }
+      function animateTrajectory(pX, pY)
+      {
+        drawPCCanvas();
+
+        ctx.lineWidth = 1;
+        ctx.fillStyle = "black";
+
+        ctx.beginPath();
+        ctx.moveTo(cannonX*canvas.width, 0.8*canvas.height);
+        for(let n = 0; n <= count; n++)
+        {
+          ctx.lineTo(pX[n], pY[n]);
+        }
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(pX[count], pY[count], 0.006*canvas.width, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fill();
+
+        count++;
+        if(count == pX.length)
+        {
+          window.clearInterval(animationID);
+          animationID = null;
+          console.log("Done.");
+        }
+      }
+      // Initialize app
+      drawPCCanvas();
+    </script>
+  </body>
+</html>
