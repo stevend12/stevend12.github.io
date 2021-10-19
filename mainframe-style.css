@@ -4,6 +4,7 @@
 
 /* Generic HTML elements */
 body {
+  margin: 0%;
   font-family: Courier;
   background-color: rgb(0, 64, 64);
   color: cyan;
@@ -50,6 +51,7 @@ p {
 main {
   text-align: center;
   margin: 0 auto;
+  margin: 25% 0%;
 }
 
 footer {
@@ -59,6 +61,10 @@ footer {
   color: cyan;
   text-align: center;
   font-size: 80%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 /*********************/
@@ -69,6 +75,10 @@ footer {
 .top-bar {
   padding: 1%;
   background: black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 
 /* Menu icon */
@@ -117,7 +127,7 @@ p.feature-links {
   margin: 3% auto 1% auto;
 }
 #main-image {
-  width: 90%;
+  height: 25vh;
   margin: 0% 1%;
 }
 #main-caption {
@@ -191,6 +201,9 @@ button:hover.projectile-cannon {
   p {
     width: 50%;
   }
+  main {
+    margin: 10% 0%;
+  }
 
   /* Menu icon */
   #menu-icon
@@ -210,10 +223,10 @@ button:hover.projectile-cannon {
   /* Portfolio gallery */
   #main-display {
     flex-direction: row;
-    width: 60%;
+    width: 80%;
   }
   #main-image {
-    height: 30vh;
+    height: 25vh;
     width: auto;
   }
   button.thumbnail {

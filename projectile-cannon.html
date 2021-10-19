@@ -63,7 +63,7 @@
         ctx.fillStyle = "rgb(0, 200, 0)";
         ctx.fillRect(0, 0.8*h, w, 0.2*h);
         // Draw cannon
-        ctx.lineWidth = 8;
+        ctx.lineWidth = 12;
         ctx.beginPath();
         ctx.arc(cannonX*w, cannonY*h, 0.02*w, 0, 2*Math.PI);
         ctx.stroke();
@@ -79,8 +79,8 @@
       function changeAngle(increment)
       {
         cannon_angle += increment;
-        if(cannon_angle < -89) cannon_angle = -89;
-        if(cannon_angle > -1) cannon_angle = -1;
+        if(cannon_angle < -87) cannon_angle = -87;
+        if(cannon_angle > -5) cannon_angle = -5;
         drawPCCanvas();
       }
       function fireCannon()
