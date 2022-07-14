@@ -5,13 +5,11 @@
     <description>Most recent updates to SampleApp</description>
     <language>en</language>
     <item>
-      <title>Version 0.1.0</title>
-      <sparkle:releaseNotesLink>
-        https://stevend12.github.io/release_notes_v0.1.0.html
-      </sparkle:releaseNotesLink>
-      <pubDate>Thu, 14 Jul 2022 12:00:00 -0500</pubDate>
-      <enclosure url="https://stevend12.github.io/SampleApp-0.1.0-win64.zip"
-        sparkle:dsaSignature="MEQCIBMc3R2+zdVxSgT8Z2nwBr9HDBmZB5QaYel2cQ+jqwwZAiBWMyio/qmGzpF32IM/fd0ZhaQoOLxUQ4ogfuAUuAr+Wg=="
+      <title>Version 0.2.0</title>
+      <sparkle:releaseNotesLink>https://stevend12.github.io/release_notes_v0.2.0.html</sparkle:releaseNotesLink>
+      <pubDate>Thu, 14 Jul 2022 12:35:00 -0500</pubDate>
+      <enclosure url="https://stevend12.github.io/SampleApp-0.2.0-win64.zip"
+        sparkle:dsaSignature="MEQCIC9rAPxyuFKGOp1jXj8iW//jFZp5y7HwK4Jcx93Y19UbAiBIyzv3esVCJA38EEaXpqetLNM1iHs7EnJ9cd1OKiHkDg=="
         sparkle:version="0.1.0"
         length="0"
         type="application/octet-stream" />
