@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app>
+  <title>SampleApp</title>
+  <version>0.5.0</version>
+  <releaseNotes>release_notes_v0.5.0.html</releaseNotes>
+  <fileList os="win">
+    <file>
+      <fileName>SampleApp.exe</fileName>
+      <fileSize>4341253</fileSize>
+      <pubDate>08-02-2022</pubDate>
+    </file>
+  </fileList>
+</app>
